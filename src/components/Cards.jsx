@@ -1,7 +1,8 @@
 import React from "react";
 
-const Cards = ({ taskData }) => {
+const Cards = ( taskData ) => {
   const { title, priority, date } = taskData;
+  console.log(title,'title');
   return (
     <div className="bg-white rounded-lg p-4 mb-2">
       <h2 className="text-black">{title}</h2>

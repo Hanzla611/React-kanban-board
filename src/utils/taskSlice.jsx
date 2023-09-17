@@ -7,12 +7,16 @@ const taskSlice = createSlice({
         addTask:(state, action) => {
             return [...state, action.payload]
         },
-        removeTask:(state, action) => {
-            return null
-        }
+        moveTaskToColumn: (state, action) => {
+            const { taskId, newColumn } = action.payload;
+            const task = state.find((t) => t.id === taskId);
+            if (task) {
+              task.column = newColumn;
+            }
+          },
     }
 })
 
-export const {addTask, removeTask} = taskSlice.actions
+export const {addTask, moveTaskToColumn} = taskSlice.actions
 
 export default taskSlice.reducer
