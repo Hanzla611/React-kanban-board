@@ -12,8 +12,8 @@ const Cards = (taskData) => {
   } = taskData;
 
   return (
-    <div className="bg-white rounded-lg p-4 mb-2">
-      <div className="w-full flex justify-between">
+    <div className="bg-white rounded-lg p-4 mb-2 ">
+      <div className="w-full flex justify-between flex-wrap sm:flex-nowrap md:flex-nowrap">
         <h2 className="text-black">{title}</h2>
         <span className="cursor-pointer" onClick={handleDeleteCard}>
           <svg
@@ -32,7 +32,7 @@ const Cards = (taskData) => {
           </svg>
         </span>
       </div>
-      <div className="flex justify-between mt-10 align-middle">
+      <div className="flex justify-between mt-10 align-middle flex-wrap sm:flex-nowrap md:flex-nowrap">
         <span className=" flex text-sm text-gray-400">
           Priority: {priority}
         </span>
