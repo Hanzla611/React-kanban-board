@@ -1,34 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
-import Backlog from "../components/Backlog";
-import Todo from "../components/Todo";
-import Ongoing from "../components/Ongoing";
-import Done from "../components/Done";
 import Addtodo from "../components/Addtodo";
-import { useDispatch, useSelector } from "react-redux";
-// import { addTodoTask } from "../utils/todoSlice";
-
+import { useDispatch } from "react-redux";
+import ListData from "../components/ListData";
+import {Toaster } from "react-hot-toast";
+import { addUser } from "../utils/userSlice";
 
 function Dashboard() {
   const dispatch = useDispatch();
-  const taskData = useSelector((store) => store.task);
-  
+  useEffect(() =>{
+    dispatch(addUser(localStorage.getItem('userData')))
+  },[])
   return (
     <>
+      <Toaster position="top-center" reverseOrder={false} />
       <Header />
       <div>
         <Addtodo />
       </div>
       <div className="flex ms-4">
-        <Backlog
-          taskData={taskData}
-          setComponenetName={setComponenetName}
-        />
-        <Todo
-          setComponenetName={setComponenetName}
-        />
-        <Ongoing />
-        <Done />
+        <ListData />
       </div>
     </>
   );
