@@ -2,14 +2,16 @@ import React, { useRef, useState } from "react";
 import {
   moveTaskToColumn,
   removeTask,
-  moveCardLeft,
-  moveCardRight,
+  updateTask,
+  // moveCardLeft,
+  // moveCardRight,
 } from "../utils/taskSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import Cards from "./Cards";
 import ColumnBlock from "./Column";
 import toast from "react-hot-toast";
+import EditModal from "./EditModal";
 // import { TrashIcon } from '@heroicons/react/outline';
 
 const columns = {
@@ -24,7 +26,16 @@ function ListData() {
   const todos = useSelector((store) => store.task);
   const columnMap = Object.keys(columns);
   const draggedTodoItem = useRef(null);
-  const [isDragging, setIsDragging] = useState(false); 
+  const [isDragging, setIsDragging] = useState(false);
+  const [editId, setEditId] = useState();
+  
+  // const [editableTask, setEditableTask] = useState(null);
+  // const [editedTask, setEditedTask] = useState({
+  //   title: "",
+  //   date: "",
+  //   priority: "",
+  // });
+  const [isEditModal, setIsEditModal] = useState(false);
 
   const handleColumnDrop = (column) => {
     const draggedTodoId = draggedTodoItem.current;
@@ -54,10 +65,10 @@ function ListData() {
 
   const handleDragStart = (todoId) => {
     draggedTodoItem.current = todoId;
-    setIsDragging(true); 
+    setIsDragging(true);
   };
   const handleDragEnd = () => {
-    setIsDragging(false); 
+    setIsDragging(false);
   };
 
   const handleDropOnBin = () => {
@@ -74,9 +85,32 @@ function ListData() {
     });
   };
 
+  const handleUpdateCard = (id) => {
+    setEditId(id)
+    setIsEditModal(true);
+  };
+  // const modalStyles = {
+  //   position: "relative",
+  //   backgroundColor: "red",
+  //   zIndex:"99",
+  //   top: "50%",
+  //   left: "50%",
+  //   transform: isEditModal ? "translate(-50%, -50%)" : "translate(-50%, -50%)",
+  // };
+
   return (
-    <div className="w-screen">
-      <div className="flex flex-wrap sm:flex-nowrap md:flex-nowrap">
+    <div className={`w-screen ${isEditModal ? "block" : ""}`}>
+      <div className="flex">
+        <div className='flex'>
+        {isEditModal && (
+          <EditModal
+            setIsEditModal={setIsEditModal}
+            editId={editId}
+            // handleUpdateCard={() => handleUpdateCard}
+          />
+        )}
+        </div>
+        
         {columnMap.map((column, index) => (
           <>
             <ColumnBlock key={index} columnTitle={columns[column]}>
@@ -106,9 +140,13 @@ function ListData() {
                           date={todo.date}
                           priority={todo.priority}
                           handleDeleteCard={() => handleDeleteCard(todo.id)}
+                          handleUpdateCard={() => handleUpdateCard(todo.id)}
+                          setIsEditModal={setIsEditModal}
+                          isEditModal={isEditModal}
                           // handleMoveLeft={() => handleMoveLeft(todo.id)}
                           // handleMoveRight={() => handleMoveRight(todo.id)}
                         />
+                        <div className="flex flex-row justify-between items-center absolute z-10 text-center"></div>
                       </div>
                     </>
                   ))}
@@ -117,6 +155,7 @@ function ListData() {
           </>
         ))}
       </div>
+
       {isDragging && (
         <div
           className="flex items-center justify-center m-2 bg-slate-50 z-10 h-60 rounded-sm p-2"
