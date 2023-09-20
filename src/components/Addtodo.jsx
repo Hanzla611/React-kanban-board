@@ -32,7 +32,7 @@ const Addtodo = () => {
       title: todoTitle,
       priority: todoPriority,
       date: todoDate,
-      column: "Backlog",
+      column: 0,
       sortIndex:
         todoData[todoData.length + 1]?.sortIndex || todoData.length + 1,
     };

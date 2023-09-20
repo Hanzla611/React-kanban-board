@@ -10,9 +10,11 @@ const Cards = (taskData) => {
     handleDeleteCard,
     handleUpdateCard,
     setIsEditModal,
-    // handleMoveLeft,
-    // handleMoveRight,
+    handleMoveRight,
+    sortIndex,
+    handleMoveLeft,
   } = taskData;
+
 
   return (
     <div className="bg-white rounded-lg p-4 mb-2 ">
@@ -62,8 +64,14 @@ const Cards = (taskData) => {
         </div>
       </div>
       <div className="flex justify-between mt-8">
-        <span className="text-xxl">⬅️</span>
-        <span className="text-xxl">➡️</span>
+        {sortIndex > 0 && ( 
+          <span onClick={() => handleMoveLeft(sortIndex)} className="text-xxl">
+            ⬅️
+          </span>
+        )}
+        <span onClick={() => handleMoveRight(sortIndex)} className="text-xxl">
+          ➡️
+        </span>
       </div>
     </div>
   );
