@@ -1,7 +1,8 @@
+import React, { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import Login from "./pages/Login";
 import { RouterProvider } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+const Login = lazy(() => import("./pages/Login"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
 function Body() {
   const appRouter = createBrowserRouter([
     {
@@ -15,9 +16,9 @@ function Body() {
   ]);
 
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <RouterProvider router={appRouter} />
-    </div>
+      </Suspense>
   );
 }
 
