@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { updateTask } from "../utils/taskSlice";
 import "../assets/Modal.css";
+import toast from "react-hot-toast";
 
 function EditModal({ setIsEditModal, handleUpdateCard, editId }) {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ function EditModal({ setIsEditModal, handleUpdateCard, editId }) {
       updatedPriority: priorityRef.current.value || priority,
     };
     dispatch(updateTask(editPayload));
+    toast.success('updated successfully');
     titleRef.current.value = "";
     priorityRef.current.value = null;
     dateRef.current.value = null;

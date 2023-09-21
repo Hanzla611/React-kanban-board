@@ -104,7 +104,6 @@ function ListData() {
 
         {columnMap2.map(
           (column, index) => (
-            console.log(column, "sfdsf"),
             (
               <>
                 <ColumnBlock key={index} columnTitle={columns[column]}>
@@ -139,6 +138,7 @@ function ListData() {
                               sortIndex={todo.sortIndex}
                               handleMoveLeft={() => handleMoveLeft(todo)}
                               handleMoveRight={() => handleMoveRight(todo)}
+                              columnNumber={todo.column}
                             />
                             <div className="flex flex-row justify-between items-center absolute z-10 text-center"></div>
                           </div>

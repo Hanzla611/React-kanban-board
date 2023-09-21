@@ -13,9 +13,10 @@ const Cards = (taskData) => {
     handleMoveRight,
     sortIndex,
     handleMoveLeft,
+    columnNumber
   } = taskData;
 
-
+  
   return (
     <div className="bg-white rounded-lg p-4 mb-2 ">
       <div className="w-full flex justify-between flex-wrap sm:flex-nowrap md:flex-nowrap">
@@ -64,14 +65,14 @@ const Cards = (taskData) => {
         </div>
       </div>
       <div className="flex justify-between mt-8">
-        {sortIndex > 0 && ( 
+        {columnNumber > 0 && ( 
           <span onClick={() => handleMoveLeft(sortIndex)} className="text-xxl">
             ⬅️
           </span>
         )}
-        <span onClick={() => handleMoveRight(sortIndex)} className="text-xxl">
+        {columnNumber <3 && <span onClick={() => handleMoveRight(sortIndex)} className="text-xxl">
           ➡️
-        </span>
+        </span>}
       </div>
     </div>
   );
