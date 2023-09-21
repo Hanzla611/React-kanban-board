@@ -95,7 +95,7 @@ function ListData() {
 
   return (
     <div className={`w-screen ${isEditModal ? "block" : ""}`}>
-      <div className="flex">
+      <div className="flex mx-auto mr-2">
         <div className="flex">
           {isEditModal && (
             <EditModal setIsEditModal={setIsEditModal} editId={editId} />
