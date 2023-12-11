@@ -32,7 +32,7 @@ const Addtodo = () => {
       title: todoTitle,
       priority: todoPriority,
       date: todoDate,
-      column: "Backlog",
+      column: 0,
       sortIndex:
         todoData[todoData.length + 1]?.sortIndex || todoData.length + 1,
     };
@@ -44,7 +44,7 @@ const Addtodo = () => {
   };
 
   return (
-    <div className=" ml-6 mb-12 mt-8 flex ">
+    <div className=" ml-6 mb-12 mt-8 flex flex-wrap">
       <div>
         <label
           htmlFor="name"
@@ -52,7 +52,7 @@ const Addtodo = () => {
         >
           Task name
         </label>
-        <div className="flex">
+        <div className="flex flex-wrap">
           <input
             ref={title}
             type="text"
@@ -87,12 +87,13 @@ const Addtodo = () => {
 
           <button
             onClick={handleButtonClick}
-            className="bg-blue-400 p-4 rounded-md ms-1 outline-blue-300"
+            className="bg-blue-400 p-4 rounded-md ms-1 outline-blue-300 my-4 sm:my-0 md:my-0"
           >
             Add
           </button>
         </div>
       </div>
+      <div className="py-4 flex flex-wrap">
       <h3 className="text-sm flex font-bold ml-8 mr-4">
         Total count: {taskData.length}
       </h3>
@@ -100,6 +101,8 @@ const Addtodo = () => {
         Pending count: {pendingCount}
       </h3>
       <h3 className="text-sm flex font-bold ml-8 mr-4">Completed: {doneCount}</h3>
+      </div>
+     
     </div>
   );
 };
